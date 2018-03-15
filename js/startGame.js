@@ -43,7 +43,7 @@ function wonGame() {
   scoreResult.textContent = 'Your score: ' + player.score +
     ' points! and Your time: ' + getTimer() + ' seconds!';
   stopTimer();
-  resetGame();
+  player.y = 320;
 }
 
 function loseGame() {
