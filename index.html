@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Effective JavaScript: Frogger</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <section class="startGame">
+      <div class="container">
+        <h2 class="wonHeader">Choose your character!</h2>
+        <div class="container2">
+          <img src="images/up.png" class="leftArrow">
+        <div class="canvasCharacter"></div>
+          <img src="images/up.png" class="rightArrow">
+        </div>
+        <button class="startButton">Start game!</button>
+      </div>
+    </section>
+    <section class="gamePanel">
+      <section class="score-panel">
+        <span>Score: </span>
+        <span class="score">0</span>
+        <span>Time: </span>
+        <span class="timer">00:00:00</span>
+      </section>
+    </section>
+    <section class="startGame won">
+      <div class="container">
+        <h2 class="wonHeader">Congratulations!</h2>
+        <h3 class="scoreResult"></h3>
+        <button class="playButton">Play again!</button>
+      </div>
+    </section>
+  </div>
+  <script src="js/timeManager.js"></script>
+  <script src="js/resources.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/startGame.js"></script>
+  <script src="js/chooseCharacter.js"></script>
+</body>
+
+
+</html>
