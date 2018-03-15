@@ -2,6 +2,7 @@
 
 ### How to run the game
 - Go to: [**Link**](https://htmlpreview.github.io/?https://github.com/QArtur99/Arcade-Game/blob/master/index.html "Link")
+- Clone or download repository as a zip file and open index.html file in your browser
 
 
 ### How to PLay

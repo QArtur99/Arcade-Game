@@ -34,17 +34,6 @@ canvas.className = "gamePanel"
 let gamePanelView = document.querySelector('.gamePanel');
 gamePanelView.appendChild(canvas);
 
-
-let itemArray = [
-  'images/Gem-Blue.png',
-  'images/Gem-Green.png',
-  'images/Gem-Orange.png',
-  'images/Heart.png',
-  'images/Key.png'
-];
-let waitTimeArray = [2, 4, 6];
-
-
 function startEngine(global) {
 
 
@@ -98,89 +87,11 @@ function startEngine(global) {
    * on the entities themselves within your app.js file).
    */
   function update(dt) {
-    updateEntities(dt);
-    checkCollisions();
-    checkPosition();
-    generateItem();
-    checkItem();
-  }
-
-  /* This is called by the update function and loops through all of the
-   * objects within your allEnemies array as defined in app.js and calls
-   * their update() methods. It will then call the update function for your
-   * player object. These update methods should focus purely on updating
-   * the data/properties related to the object. Do your drawing in your
-   * render methods.
-   */
-  function updateEntities(dt) {
-    allEnemies.forEach(function(enemy) {
-      enemy.update(dt);
-    });
-    player.update();
-  }
-
-//check collisions
-  function checkCollisions() {
-    allEnemies.forEach(function(enemy) {
-      if (enemy.y == player.y && player.x > enemy.x && 70 >= player.x - enemy.x) {
-        loseGame();
-      }
-    });
-  }
-
-//chck player position to increase points
-  function checkPosition() {
-    if (player.previousX != player.x || player.previousY != player.y) {
-      for (let x = 0; 5 > x; x++) {
-        for (let y = 0; 3 > y; y++) {
-          if (x * 101 == player.x && 71 + y * 83 == player.y) {
-            player.previousX = player.x;
-            player.previousY = player.y;
-            player.score += 5;
-            score.textContent = player.score;
-          }
-        }
-      }
-    }
-  }
-
-//logic to generate the item
-  function generateItem() {
-
-    if (item.isVisible) {
-      if (getTimer() > (item.timeOfLastItem + item.timeOfVisibility)) {
-        let randomNumber = random(3);
-        item.x = 1000;
-        item.y = 0;
-        item.isVisible = false;
-        item.timeOfLastItem = getTimer();
-        item.timeOfInvisibility = waitTimeArray[randomNumber];
-      }
-    } else if (!item.isVisible) {
-      if (getTimer() > (item.timeOfLastItem + item.timeOfInvisibility)) {
-        let randomNumber = random(3);
-        let randomNumberPic = random(5);
-        let randX = random(5);
-        let randY = random(3);
-        item.x = randX * 101;
-        item.y = randY * 83 + 71;
-        item.isVisible = true;
-        item.timeOfLastItem = getTimer();
-        item.timeOfVisibility = waitTimeArray[randomNumber];
-        item.sprite = itemArray[randomNumberPic];
-        item.bonusIndex = randomNumberPic;
-      }
-    }
-  }
-
-  //check whether an item is taken by player
-  function checkItem() {
-    if (item.x == player.x && item.y == player.y) {
-      item.x = 1000;
-      item.y = 0;
-      item.isVisible = false;
-      player.score += 20 + item.bonusIndex * 25;
-    }
+    allEnemies.forEach(enemy => enemy.update(dt));
+    allEnemies.forEach(enemy => player.checkCollision(enemy));
+    player.checkPosition();
+    item.generateItem();
+    item.checkItem(player);
   }
 
 
